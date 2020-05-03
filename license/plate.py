@@ -29,5 +29,7 @@ class LicensePlateDetector:
         # apply the blackhat operation
         blackhat = cv2.morphologyEx(gray, cv2.MORPH_BLACKHAT, rect_kernel)
 
+        return blackhat
+
 
 
