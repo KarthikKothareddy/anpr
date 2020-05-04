@@ -19,7 +19,7 @@ def localize_and_draw(image_path):
     image = imutils.resize(image, width=640) if image.shape[1] > 640 else image
 
     # initialize the license plate detector and detect the license plates and characters
-    lpd = LicensePlateDetector(image)
+    lpd = LicensePlateDetector(image, mode="bgr")
     plates = lpd.detect()
 
     # loop over the license plate regions and draw the bounding box surrounding the
