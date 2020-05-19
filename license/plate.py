@@ -13,13 +13,15 @@ LicensePlate = namedtuple("LicensePlateRegion", ["success", "plate", "thresh", "
 
 class LicensePlateDetector:
 
-    def __init__(self, image, min_plate_w=60, min_plate_h=20, mode="bgr"):
+    def __init__(self, image, min_plate_w=60, min_plate_h=20, mode="bgr", num_chars=7, min_char_w=40):
         # license plate region
         self.image = image
         self.mode = mode
         self._to_gray = cv2.COLOR_BGR2GRAY if self.mode == "bgr" else cv2.COLOR_RGB2GRAY
         self.min_plate_w = min_plate_w
         self.min_plate_h = min_plate_h
+        self.num_chars = num_chars
+        self.min_char_w = min_char_w
 
     def detect(self):
         # wrapper around detect_plates
