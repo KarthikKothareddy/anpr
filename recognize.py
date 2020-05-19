@@ -33,6 +33,7 @@ def localize_and_draw(image_path):
 
 paths = random.sample(list(paths.list_images("./data")), 2)
 for path in paths:
+    print(path)
     localize_and_draw(path)
 
 

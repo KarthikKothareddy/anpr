@@ -1,6 +1,14 @@
+from collections import namedtuple
+from skimage.filters import threshold_local
+from skimage import segmentation
+from skimage import measure
+from imutils import perspective
 import numpy as np
-import cv2
 import imutils
+import cv2
+
+
+LicensePlate = namedtuple("LicensePlateRegion", ["success", "plate", "thresh", "candidates"])
 
 
 class LicensePlateDetector:
