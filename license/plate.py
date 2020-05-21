@@ -30,10 +30,13 @@ class LicensePlateDetector:
         for region in regions:
             # detect character candidates in the current license plate region
             lp = self.detect_character_candidates(region)
+            """
             # only continue if characters were successfully detected
             if lp.success:
                 # yield a tuple of the license plate object and bounding box
                 yield lp, region
+            """
+            return lp
 
     def detect_character_candidates(self, region):
         # apply a 4-point transform to extract the license plate

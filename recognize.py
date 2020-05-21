@@ -24,11 +24,14 @@ def localize_and_draw(image_path):
 
     # loop over the license plate regions and draw the bounding box surrounding the
     # license plate
+    """
     for lp_box in plates:
         lp_box = np.array(lp_box).reshape((-1, 1, 2)).astype(np.int32)
         cv2.drawContours(image, [lp_box], -1, (0, 255, 0), 2)
+    
+    """
     # show
-    display(image)
+    display(plates)
 
 
 paths = random.sample(list(paths.list_images("./data")), 2)
