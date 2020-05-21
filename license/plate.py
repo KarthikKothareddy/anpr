@@ -25,7 +25,20 @@ class LicensePlateDetector:
 
     def detect(self):
         # wrapper around detect_plates
-        return self.detect_plates()
+        regions = self.detect_plates()
+        # loop over the license plate regions
+        for region in regions:
+            # detect character candidates in the current license plate region
+            lp = self.detect_character_candidates(region)
+            # only continue if characters were successfully detected
+            if lp.success:
+                # yield a tuple of the license plate object and bounding box
+                yield lp, region
+
+    def detect_character_candidates(self, region):
+        # apply a 4-point transform to extract the license plate
+        plate = perspective.four_point_transform(self.image, region)
+        return imutils.resize(plate, width=400)
 
     def detect_plates(self):
         # init rectangle kernel
