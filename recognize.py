@@ -30,9 +30,11 @@ def localize_and_draw(image_path):
         cv2.drawContours(image, [lp_box], -1, (0, 255, 0), 2)
     
     """
+    print(type(plates))
+    print(len(plates))
 
     # show
-    display(plates, flip=False, cmap="gray")
+    #display(plates, flip=False, cmap="gray")
 
 
 paths = random.sample(list(paths.list_images("./data")), 2)
