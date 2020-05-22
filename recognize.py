@@ -37,7 +37,7 @@ def localize_and_draw(image_path):
     #display(plates, flip=False, cmap="gray")
 
 
-paths = random.sample(list(paths.list_images("./data")), 2)
+paths = random.sample(list(paths.list_images("./data")), 1)
 for path in paths:
     # print(path)
     localize_and_draw(path)

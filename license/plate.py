@@ -56,7 +56,7 @@ class LicensePlateDetector:
 
         # perform a connected components analysis and initialize the mask to store the locations
         # of the character candidates
-        labels = measure.label(thresh, connectivity=8, background=0)
+        labels = measure.label(thresh, connectivity=2, background=0)
         char_candidates = np.zeros(thresh.shape, dtype="uint8")
 
         # loop over the unique components
