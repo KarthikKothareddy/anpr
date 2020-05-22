@@ -31,12 +31,12 @@ def localize_and_draw(image_path):
     
     """
     # show
-    display(plates)
+    display(plates, flip=False, cmap="gray")
 
 
 paths = random.sample(list(paths.list_images("./data")), 2)
 for path in paths:
-    print(path)
+    # print(path)
     localize_and_draw(path)
 
 

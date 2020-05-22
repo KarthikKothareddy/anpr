@@ -39,9 +39,26 @@ class LicensePlateDetector:
             return lp
 
     def detect_character_candidates(self, region):
+
         # apply a 4-point transform to extract the license plate
         plate = perspective.four_point_transform(self.image, region)
-        return imutils.resize(plate, width=400)
+
+        # extract the Value component from the HSV color space and apply adaptive thresholding
+        # to reveal the characters on the license plate
+        V = cv2.split(cv2.cvtColor(plate, cv2.COLOR_BGR2HSV))[2]
+        T = threshold_local(V, 29, offset=15, method="gaussian")
+        thresh = (V > T).astype("uint8") * 255
+        thresh = cv2.bitwise_not(thresh)
+
+        # resize the license plate region to a canonical size
+        plate = imutils.resize(plate, width=400)
+        thresh = imutils.resize(thresh, width=400)
+
+        # perform a connected components analysis and initialize the mask to store the locations
+        # of the character candidates
+        labels = measure.label(thresh, neighbors=8, background=0)
+        char_candidates = np.zeros(thresh.shape, dtype="uint8")
+        
 
     def detect_plates(self):
         # init rectangle kernel
