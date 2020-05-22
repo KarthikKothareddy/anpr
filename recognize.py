@@ -30,6 +30,7 @@ def localize_and_draw(image_path):
         cv2.drawContours(image, [lp_box], -1, (0, 255, 0), 2)
     
     """
+
     # show
     display(plates, flip=False, cmap="gray")
 

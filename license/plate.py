@@ -58,7 +58,19 @@ class LicensePlateDetector:
         # of the character candidates
         labels = measure.label(thresh, neighbors=8, background=0)
         char_candidates = np.zeros(thresh.shape, dtype="uint8")
-        
+
+        # loop over the unique components
+        for label in np.unique(labels):
+            # if this is the background label, ignore it
+            if label == 0:
+                continue
+            # otherwise, construct the label mask to display only connected components for the
+            # current label, then find contours in the label mask
+            label_mask = np.zeros(thresh.shape, dtype="uint8")
+            label_mask[labels == label] = 255
+            contours = cv2.findContours(label_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours = imutils.grab_contours(contours)
+            return label
 
     def detect_plates(self):
         # init rectangle kernel
